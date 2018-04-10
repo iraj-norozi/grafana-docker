@@ -1,0 +1,15 @@
+SELECT
+  $__time(date),
+  avg(loss) as value,
+  'Avrage Packet Losst' as metric
+FROM QOE_ping
+WHERE taskName='GTCI' and geo='IRAN'  and  $__timeFilter(date)
+group by geo,DATE(`date`),FLOOR(HOUR(`date`)/4) order by geo ,`date` desc;
+
+############################################################################
+SELECT
+  $__time(date),
+  loss as value,
+  'Packet Losst' as metric
+FROM QOE_ping
+WHERE taskName='GTCI' and geo='IRAN' and $__timeFilter(date);
